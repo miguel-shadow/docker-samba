@@ -13,7 +13,8 @@ RUN apk --no-cache add --update \
 RUN mkdir /samba-files
 
 # Crear usuarios samba
-ENV USER=<usuario>
+ENV USER=<usuario> # Usuario samba
+ENV PASSWORD=<password> # Contraseña usuario samba
 
 RUN addgroup ${USER}
 
@@ -27,8 +28,8 @@ RUN adduser \
 
 # Contraseña usuario
 ADD .pw /
-RUN (cat /.pw ; cat /.pw) | passwd ${USER}
-RUN (cat /.pw ; cat /.pw) | smbpasswd -a ${USER}
+RUN (echo "${PASSWORD}" ; echo "${PASSWORD}") | passwd ${USER}
+RUN (echo "${PASSWORD}" ; echo "${PASSWORD}") | smbpasswd -a ${USER}
 RUN rm .pw
 
 # Arranque Docker

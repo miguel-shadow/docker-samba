@@ -1,12 +1,12 @@
-version: "2"
+version: 2
 services:
   samba:
     container_name: samba
     restart: always
     build: .
     ports:
-      - "445:445"
+      - 445:445
     volumes:
-      - <ruta_carpeta_compartida>:/samba-files
+      - <ruta_carpeta_compartida>:/samba-files # Carpeta a compartir
       - ./smb.conf:/etc/samba/smb.conf
       - ./logs:/var/log/samba/
